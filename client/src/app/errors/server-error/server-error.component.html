@@ -1,0 +1,15 @@
+<h4>Internal server error</h4>
+@if (error) {
+    <h5 class="text-danger">Error: {{error.message}}</h5>
+    <p>Opis problema: (Angular is not to blame)</p>
+    <ol>
+        <li>za pregledati network request</li>
+        <li>pregledati URL spodletelega requesta</li>
+        <li>reproduce in Postman</li>
+    </ol>
+    <p>sledi Stacktrace - za preveriti prvi dve vrsti</p>
+    <hr>
+    <code class="mt-5" style="background-color: whitesmoke;">
+        {{error.details}}
+    </code>
+}
