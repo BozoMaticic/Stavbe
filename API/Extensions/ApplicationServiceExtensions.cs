@@ -1,5 +1,5 @@
-using System;
 using API.Data;
+using API.Data.Repos;
 using API.Interfaces;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
@@ -18,9 +18,12 @@ public static class ApplicationServiceExtensions
         });
         services.AddCors();
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         // services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        // services.AddSwaggerGen();
 
         return services;
 
