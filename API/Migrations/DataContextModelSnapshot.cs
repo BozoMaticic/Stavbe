@@ -147,13 +147,7 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EnergentTip");
-
                     b.HasIndex("IdStavbe");
-
-                    b.HasIndex("SifraJavnegaObjekta");
-
-                    b.HasIndex("StMerilnegaMesta");
 
                     b.ToTable("MerilnaMesta");
                 });
@@ -489,12 +483,6 @@ namespace API.Migrations
                         .HasColumnType("decimal(7,4)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Naziv");
-
-                    b.HasIndex("SifraJavnegaObjekta");
-
-                    b.HasIndex("VrstaObjekta");
 
                     b.ToTable("Stavbe");
                 });

@@ -1,17 +1,13 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using API.Entities;
 
-namespace API.Entities;
+namespace API.DTOs;
 
-// [Index(nameof(StMerilnegaMesta))]
-public class MerilnoMesto
+public class MerilnoMestoDto
 {
     public int Id { get; set; }
     public string StMerilnegaMesta { get; set; } = null!;
-    public DateTime? CreatedDate { get; set; }
-    public DateTime? UpdatedDate { get; set; }
     public int Energent { get; set; }
     public string EnergentTip { get; set; } = null!;
     public int? Type { get; set; }
@@ -27,15 +23,6 @@ public class MerilnoMesto
     public string? DobaviteljNaziv { get; set; } = null!;
     public int ObracunskaMoc { get; set; }
 
-    [Column(TypeName = "decimal(7,4)")]
-    public decimal? ZemljepisnaSirina { get; set; }
-
-    [Column(TypeName = "decimal(7,4)")]
-    public decimal? ZemljepisnaDolzina { get; set; }
-
-    [Column(TypeName = "decimal(7,4)")]
-    public decimal? NadmorskaVisina { get; set; }
-
     #region Navigation Properties
     public Stavba? Stavba { get; set; } = null!;
     [ForeignKey(nameof(Stavba))]
@@ -44,5 +31,5 @@ public class MerilnoMesto
     #endregion
 
 
-}
 
+}

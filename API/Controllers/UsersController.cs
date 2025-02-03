@@ -28,5 +28,4 @@ public class UsersController(IUserRepository userRepository) : BaseApiController
         return user;
     }
 
-
 }

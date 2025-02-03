@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Prva : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -217,24 +217,9 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_MerilnaMesta_EnergentTip",
-                table: "MerilnaMesta",
-                column: "EnergentTip");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MerilnaMesta_IdStavbe",
                 table: "MerilnaMesta",
                 column: "IdStavbe");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MerilnaMesta_SifraJavnegaObjekta",
-                table: "MerilnaMesta",
-                column: "SifraJavnegaObjekta");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MerilnaMesta_StMerilnegaMesta",
-                table: "MerilnaMesta",
-                column: "StMerilnegaMesta");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Odcitki_EnergentTip",
@@ -265,21 +250,6 @@ namespace API.Migrations
                 name: "IX_Photos_AppUserId",
                 table: "Photos",
                 column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Stavbe_Naziv",
-                table: "Stavbe",
-                column: "Naziv");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Stavbe_SifraJavnegaObjekta",
-                table: "Stavbe",
-                column: "SifraJavnegaObjekta");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Stavbe_VrstaObjekta",
-                table: "Stavbe",
-                column: "VrstaObjekta");
         }
 
         /// <inheritdoc />

@@ -41,6 +41,8 @@ try
     var context = services.GetRequiredService<DataContext>();
     await context.Database.MigrateAsync();
     await Seed.SeedUsers(context);
+    await SeedStavbe.Seed(context);
+    await SeedMerilnaMesta.ImportMM(context);
 }
 catch (Exception ex)
 {

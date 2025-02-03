@@ -19,6 +19,7 @@ public static class ApplicationServiceExtensions
         services.AddCors();
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IStavbeRepository, StavbeRepository>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

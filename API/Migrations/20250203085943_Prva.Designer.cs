@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250131082857_init")]
-    partial class init
+    [Migration("20250203085943_Prva")]
+    partial class Prva
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -150,13 +150,7 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EnergentTip");
-
                     b.HasIndex("IdStavbe");
-
-                    b.HasIndex("SifraJavnegaObjekta");
-
-                    b.HasIndex("StMerilnegaMesta");
 
                     b.ToTable("MerilnaMesta");
                 });
@@ -492,12 +486,6 @@ namespace API.Migrations
                         .HasColumnType("decimal(7,4)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Naziv");
-
-                    b.HasIndex("SifraJavnegaObjekta");
-
-                    b.HasIndex("VrstaObjekta");
 
                     b.ToTable("Stavbe");
                 });

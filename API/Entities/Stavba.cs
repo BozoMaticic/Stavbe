@@ -4,10 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Entities;
 
-    [Table("Stavbe")]
-    [Index(nameof(SifraJavnegaObjekta))]
-    [Index(nameof(VrstaObjekta))]
-    [Index(nameof(Naziv))]
+    // [Table("Stavbe")]
+    // [Index(nameof(Naziv))]
 public class Stavba
 {
     public int Id { get; set; }
