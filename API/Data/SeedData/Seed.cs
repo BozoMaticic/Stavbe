@@ -6,7 +6,7 @@ using API.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Data;
+namespace API.Data.SeedData;
 
 public class Seed
 {

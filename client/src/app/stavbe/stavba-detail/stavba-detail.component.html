@@ -1,0 +1,58 @@
+@if (stavba) {
+    <div class="row">
+        <div class="col-4">
+            <div class="card">
+                <img 
+                    src="{{ stavba.fotoUrl || './../assets/user.png'}}" 
+                    alt="{{stavba.naziv}}"
+                    class="card-img img-thumbnail"
+                >
+                <div class="card-body">
+                    <div>
+                        <strong>Naziv:</strong>
+                        <p>{{stavba.naziv}}</p>
+                    </div>
+                    <div>
+                        <strong>Neto tloris:</strong>
+                        <p>{{stavba.ntP_NetoTloris}}</p>
+                    </div>
+                    <div>
+                        <strong>Uporabna površina:</strong>
+                        <p>{{stavba.uporabnaPovrsina}}</p>
+                    </div>
+                    <div>
+                        <strong>Vrsta javnega objekta:</strong>
+                        <p>{{stavba.vrstaObjekta}}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group d-flex">
+                        <button class="btn btn-primary">Urejanje</button>
+                        <button class="btn btn-success">Merilna mesta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-8">
+            <tabset class="member-tabset">
+                <tab heading="Lokacija {{stavba.naziv}}">
+                    <h4>Google Maps </h4>
+                    <p>{{stavba.katastrskaObcinaIme}}</p>
+                </tab>
+                <tab heading="Merilna mesta">
+                    <h4>Merilna mesta</h4>
+                </tab>
+                <tab heading="Moj elektro">
+                    <h4>Moj elektro</h4>
+                </tab>
+                <tab heading="Slike">
+                    Photos will go here
+                </tab>
+            </tabset>
+        </div>
+
+    </div>
+}
+
+

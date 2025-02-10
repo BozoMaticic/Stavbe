@@ -1,0 +1,7 @@
+<div class="row">
+    @for (stavba of stavbe; track stavba.id) {
+        <div class="col-2">
+            <app-stavba-card [stavba]="stavba"></app-stavba-card>
+        </div>
+    }
+</div>

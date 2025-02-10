@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 
-namespace API.Data;
+namespace API.Data.SeedData;
 
 public class SeedStavbe
 {

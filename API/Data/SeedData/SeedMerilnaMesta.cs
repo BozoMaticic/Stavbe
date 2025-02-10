@@ -6,28 +6,30 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 
-namespace API.Data;
+namespace API.Data.SeedData;
 
 public class SeedMerilnaMesta
 {
     private class OsnovaZaMerMesta
     {
         public int IdJavnegaObjekta { get; set; }
-        public string? Tip { get; set; }     // Polje za MerilnoMestoTypeEnum
+        public string Tip { get; set; } = "";    // Polje za MerilnoMestoTypeEnum
         public int TipID { get; set; }      // Polje za MerilnoMestoTypeEnum Int
-        public string? OdjemnoMesto { get; set; }
-        public string? Ozn_obj { get; set; }        // šifra objekta
-        public string? NazivJobjekta { get; set; }
-        public string? NovaSifra { get; set; }        // nova šifra merilnega mesta
+        public string OdjemnoMesto { get; set; } = "";
+        public string Ozn_obj { get; set; } = "";        // šifra objekta
+        public string NazivJobjekta { get; set; } = "";
+        public string NovaSifra { get; set; } = "";        // nova šifra merilnega mesta
 
-        public string? Ogrevanje { get; set; }
+        public string Ogrevanje { get; set; } = "";
         public int OgrevanjeId { get; set; }
-        public string? OgrevanjeOznaka { get; set; }
+        public string OgrevanjeOznaka { get; set; } = "";
     }
 
 
         public static async Task ImportMM(DataContext context)
         {
+            if (await context.MerilnaMesta.AnyAsync()) return;
+
             // var steviloDodanihMerMest = 0;
             List<OsnovaZaMerMesta> ListaOsnov = new List<OsnovaZaMerMesta>();
 
