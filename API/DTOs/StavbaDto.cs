@@ -8,6 +8,8 @@ public class StavbaDto
     public int Id { get; set; }
     public string SifraJavnegaObjekta { get; set; } = null!;
     public string Naziv { get; set; } = null!;
+    public string? PhotoUrl { get; set; }     // slika stavbe
+
     public string? NazivEnote { get; set; } = null!;
     public string? Naslov { get; set; } = null!;
     public string? UlicaHs { get; set; } = null!;
@@ -30,6 +32,9 @@ public class StavbaDto
     public decimal? PovrsinaAplikacija { get; set; }
 
     #region Navigation Properties
+    public List<PhotoStavbe>? PhotoStavbe { get; set; } = null!;
+
     public ICollection<MerilnoMestoDto>? MerilnaMesta { get; set; } = null!;
+
     #endregion
 }

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250203085943_Prva")]
-    partial class Prva
+    [Migration("20250218095733_prva11")]
+    partial class prva11
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -371,6 +371,32 @@ namespace API.Migrations
                     b.ToTable("Photos");
                 });
 
+            modelBuilder.Entity("API.Entities.PhotoStavbe", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StavbaId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StavbaId");
+
+                    b.ToTable("PhotoStavbe");
+                });
+
             modelBuilder.Entity("API.Entities.Stavba", b =>
                 {
                     b.Property<int>("Id")
@@ -523,6 +549,17 @@ namespace API.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("API.Entities.PhotoStavbe", b =>
+                {
+                    b.HasOne("API.Entities.Stavba", "Stavba")
+                        .WithMany("PhotoStavbe")
+                        .HasForeignKey("StavbaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stavba");
+                });
+
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
                     b.Navigation("Photos");
@@ -536,6 +573,8 @@ namespace API.Migrations
             modelBuilder.Entity("API.Entities.Stavba", b =>
                 {
                     b.Navigation("MerilnaMesta");
+
+                    b.Navigation("PhotoStavbe");
                 });
 #pragma warning restore 612, 618
         }

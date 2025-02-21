@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Migrations
 {
     /// <inheritdoc />
-    public partial class Prva : Migration
+    public partial class prva11 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -116,6 +116,28 @@ namespace API.Migrations
                     table.ForeignKey(
                         name: "FK_MerilnaMesta_Stavbe_IdStavbe",
                         column: x => x.IdStavbe,
+                        principalTable: "Stavbe",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PhotoStavbe",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Url = table.Column<string>(type: "TEXT", nullable: false),
+                    IsMain = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PublicId = table.Column<string>(type: "TEXT", nullable: true),
+                    StavbaId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PhotoStavbe", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PhotoStavbe_Stavbe_StavbaId",
+                        column: x => x.StavbaId,
                         principalTable: "Stavbe",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -250,6 +272,11 @@ namespace API.Migrations
                 name: "IX_Photos_AppUserId",
                 table: "Photos",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PhotoStavbe_StavbaId",
+                table: "PhotoStavbe",
+                column: "StavbaId");
         }
 
         /// <inheritdoc />
@@ -260,6 +287,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Photos");
+
+            migrationBuilder.DropTable(
+                name: "PhotoStavbe");
 
             migrationBuilder.DropTable(
                 name: "MerilnaMesta");

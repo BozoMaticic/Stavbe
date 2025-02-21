@@ -3,8 +3,8 @@
         <div class="col-4">
             <div class="card">
                 <img 
-                    src="{{ stavba.fotoUrl || './../assets/user.png'}}" 
-                    alt="{{stavba.naziv}}"
+                    src="{{ stavba.photoUrl || './assets/user.png'}}" 
+                    alt="{{stavba.sifraJavnegaObjekta}}"
                     class="card-img img-thumbnail"
                 >
                 <div class="card-body">
@@ -46,8 +46,12 @@
                 <tab heading="Moj elektro">
                     <h4>Moj elektro</h4>
                 </tab>
-                <tab heading="Slike">
-                    Photos will go here
+                <tab heading="Slike" #photoTab="tab">
+                    @if (photoTab.active) {
+                        <gallery [items]="images"
+                        class="gallery">
+                        </gallery>
+                    }
                 </tab>
             </tabset>
         </div>

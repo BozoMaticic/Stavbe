@@ -24,7 +24,7 @@ public class MerilnoMestoDto
     public int ObracunskaMoc { get; set; }
 
     #region Navigation Properties
-    public Stavba? Stavba { get; set; } = null!;
+  //  public Stavba? Stavba { get; set; } = null!;
     [ForeignKey(nameof(Stavba))]
     public int IdStavbe { get; set; }
     public ICollection<Odcitek>? Odcitki { get; set; } = null!;

@@ -21,6 +21,7 @@ public class StavbeRepository(DataContext context, IMapper mapper) : IStavbeRepo
     {
         return await context.Stavbe
         .Where(x => x.Naziv == nazivStavbe)
+        .Include(x => x.PhotoStavbe)
         .ProjectTo<StavbaDto>(mapper.ConfigurationProvider)
         .SingleOrDefaultAsync();
     }
@@ -28,6 +29,7 @@ public class StavbeRepository(DataContext context, IMapper mapper) : IStavbeRepo
     public async Task<StavbaDto?> GetStavbaByIdAsync(int id)
     {
         return await context.Stavbe
+        .Include(x => x.PhotoStavbe)
         .Where(x => x.Id == id)
         .ProjectTo<StavbaDto>(mapper.ConfigurationProvider)
         .SingleOrDefaultAsync();

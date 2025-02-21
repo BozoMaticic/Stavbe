@@ -15,8 +15,12 @@ public class AutoMapperProfiles : Profile
             .ForMember(d => d.PhotoUrl, o =>
                 o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain)!.Url));
 
+        CreateMap<Stavba, StavbaDto>()
+            .ForMember(s => s.PhotoUrl, d =>
+                 d.MapFrom(s => s.PhotoStavbe.FirstOrDefault(x => x.IsMain)!.Url));
+
         CreateMap<Photo, PhotoDto>();
-        CreateMap<Stavba, StavbaDto>();
+        CreateMap<PhotoStavbe, PhotoStavbeDto>();
         CreateMap<MerilnoMesto, MerilnoMestoDto>();
     }
 }
