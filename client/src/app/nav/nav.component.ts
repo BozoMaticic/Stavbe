@@ -8,17 +8,16 @@ import { TitleCasePipe } from '@angular/common';
 // import { HasRoleDirective } from '../_directives/has-role.directive';
 
 @Component({
-  selector: 'app-nav',
-  standalone: true,
- // imports: [FormsModule, BsDropdownModule, RouterLink, RouterLinkActive, HasRoleDirective],
-  imports: [FormsModule, BsDropdownModule, RouterLink, RouterLinkActive, TitleCasePipe],
-  templateUrl: './nav.component.html',
-  styleUrl: './nav.component.css'
+    selector: 'app-nav',
+    // imports: [FormsModule, BsDropdownModule, RouterLink, RouterLinkActive, HasRoleDirective],
+    imports: [FormsModule, BsDropdownModule, RouterLink, RouterLinkActive, TitleCasePipe],
+    templateUrl: './nav.component.html',
+    styleUrl: './nav.component.css'
 })
 export class NavComponent {
   accountService = inject(AccountService);
   router = inject(Router);
- private toastr = inject(ToastrService);
+  private toastr = inject(ToastrService);
   model: any = {};
 
   login() {

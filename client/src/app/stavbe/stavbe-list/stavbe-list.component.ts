@@ -4,11 +4,10 @@ import { Stavba } from '../../_models/stavba';
 import { StavbaCardComponent } from '../stavba-card/stavba-card.component';
 
 @Component({
-  selector: 'app-stavbe-list',
-  standalone: true,
-  imports: [StavbaCardComponent],
-  templateUrl: './stavbe-list.component.html',
-  styleUrl: './stavbe-list.component.css'
+    selector: 'app-stavbe-list',
+    imports: [StavbaCardComponent],
+    templateUrl: './stavbe-list.component.html',
+    styleUrl: './stavbe-list.component.css'
 })
 export class StavbeListComponent implements OnInit {
   private stavbeService = inject(StavbeService);

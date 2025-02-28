@@ -6,11 +6,10 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GalleryModule, GalleryItem, ImageItem } from 'ng-gallery';
 
 @Component({
-  selector: 'app-stavba-detail',
-  standalone: true,
-  imports: [TabsModule, GalleryModule],
-  templateUrl: './stavba-detail.component.html',
-  styleUrl: './stavba-detail.component.css'
+    selector: 'app-stavba-detail',
+    imports: [TabsModule, GalleryModule],
+    templateUrl: './stavba-detail.component.html',
+    styleUrl: './stavba-detail.component.css'
 })
 export class StavbaDetailComponent {
     private stavbeService = inject(StavbeService);
