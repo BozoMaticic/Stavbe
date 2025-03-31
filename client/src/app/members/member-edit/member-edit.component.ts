@@ -52,6 +52,4 @@ export class MemberEditComponent implements OnInit {
     this.member = event;
   }
 
-
-
 }

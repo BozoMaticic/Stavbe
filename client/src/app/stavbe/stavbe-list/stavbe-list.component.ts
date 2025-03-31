@@ -10,17 +10,14 @@ import { StavbaCardComponent } from '../stavba-card/stavba-card.component';
     styleUrl: './stavbe-list.component.css'
 })
 export class StavbeListComponent implements OnInit {
-  private stavbeService = inject(StavbeService);
-  stavbe: Stavba[] = [];
+  stavbeService = inject(StavbeService);
 
   ngOnInit(): void {
     this.loadStavbe();
   }
 
   loadStavbe() {
-    this.stavbeService.getStavbe().subscribe({
-      next: stavbe => this.stavbe = stavbe
-    })
+    this.stavbeService.getStavbe()
   }
 
 

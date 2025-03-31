@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Migrations
 {
     /// <inheritdoc />
-    public partial class prva11 : Migration
+    public partial class Prva : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -122,7 +122,7 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PhotoStavbe",
+                name: "PhotosStavbe",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -134,9 +134,9 @@ namespace API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PhotoStavbe", x => x.Id);
+                    table.PrimaryKey("PK_PhotosStavbe", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PhotoStavbe_Stavbe_StavbaId",
+                        name: "FK_PhotosStavbe_Stavbe_StavbaId",
                         column: x => x.StavbaId,
                         principalTable: "Stavbe",
                         principalColumn: "Id",
@@ -274,8 +274,8 @@ namespace API.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PhotoStavbe_StavbaId",
-                table: "PhotoStavbe",
+                name: "IX_PhotosStavbe_StavbaId",
+                table: "PhotosStavbe",
                 column: "StavbaId");
         }
 
@@ -289,7 +289,7 @@ namespace API.Migrations
                 name: "Photos");
 
             migrationBuilder.DropTable(
-                name: "PhotoStavbe");
+                name: "PhotosStavbe");
 
             migrationBuilder.DropTable(
                 name: "MerilnaMesta");

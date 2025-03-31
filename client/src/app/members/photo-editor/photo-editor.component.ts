@@ -7,7 +7,6 @@ import { MembersService } from '../../_services/members.service';
 import { environment } from '../../../environments/environment';
 import { Photo } from '../../_models/photo';
 
-
 @Component({
     selector: 'app-photo-editor',
     standalone: true,
@@ -77,7 +76,6 @@ export class PhotoEditorComponent implements OnInit {
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false
     }
-
   }
 
 

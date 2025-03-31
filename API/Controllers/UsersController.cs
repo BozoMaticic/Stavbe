@@ -4,6 +4,7 @@ using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -17,9 +18,10 @@ public class UsersController(IUserRepository userRepository, IMapper mapper,
 {
     [AllowAnonymous]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+    public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
     {
-        var users = await userRepository.GetMembersAync();
+        var users = await userRepository.GetMembersAync(userParams);
+        Response.AddPaginationHeader(users);
         return Ok(users);
     }
     [Authorize]
@@ -70,18 +72,18 @@ public class UsersController(IUserRepository userRepository, IMapper mapper,
     [HttpPut("set-main-photo/{photoId:int}")]
     public async Task<ActionResult> SetMainPhoto(int photoId)
     {
-    var user = await userRepository.GetUserByNameAsync(User.GetUserName());
-    if (user == null) return BadRequest("Could not find user");
-    var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
-    if (photo == null || photo.IsMain) return BadRequest("Cannot use this as main photo");
+        var user = await userRepository.GetUserByNameAsync(User.GetUserName());
+        if (user == null) return BadRequest("Could not find user");
+        var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+        if (photo == null || photo.IsMain) return BadRequest("Cannot use this as main photo");
 
-    var currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
-    if (currentMain != null) currentMain.IsMain = false;
-    photo.IsMain = true;
+        var currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
+        if (currentMain != null) currentMain.IsMain = false;
+        photo.IsMain = true;
 
-    if (await userRepository.SaveAllAsync()) return NoContent();
+        if (await userRepository.SaveAllAsync()) return NoContent();
 
-    return BadRequest("Problem setting main photo");
+        return BadRequest("Problem setting main photo");
     }
 
      [HttpDelete("delete-photo/{photoId:int}")]

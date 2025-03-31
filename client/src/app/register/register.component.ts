@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
-  usersFromHomeComponent = input.required<any>();
+  //usersFromHomeComponent = input.required<any>();
   cancelRegistration = output<boolean>();
 
 

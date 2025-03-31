@@ -1,9 +1,5 @@
-using System;
 using API.Data.Enums;
 using API.Entities;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 
@@ -71,18 +67,18 @@ public class SeedStavbe
             if (jObjektiPoSifri.ContainsKey(sifraJavnegaObjekta))
                 continue;
 
-                // dodamo dve fotki za testiranje
-                var foto1 = new PhotoStavbe(){
-                    Url = "C:\\BOZO\\ASources\\Stavbe\\API\\Data\\slikeStavb\\2_DomKulture.png",
-                    IsMain = true
-                };
-                var foto2 = new PhotoStavbe(){
-                    Url = "https://randomuser.me/api/portraits/women/56.jpg",
-                    IsMain = false
-                };
-                var fotke = new List<PhotoStavbe>();
-                fotke.Add(foto1);
-                fotke.Add(foto2);                    
+            // dodamo dve fotki za testiranje
+            var foto1 = new PhotoStavbe(){
+                Url = "C:\\BOZO\\ASources\\Stavbe\\API\\Data\\slikeStavb\\2_DomKulture.png",
+                IsMain = true
+            };
+            var foto2 = new PhotoStavbe(){
+                Url = "https://randomuser.me/api/portraits/women/56.jpg",
+                IsMain = false
+            };
+            var fotke = new List<PhotoStavbe>();
+            fotke.Add(foto1);
+            fotke.Add(foto2);                    
 
 
 
@@ -137,7 +133,7 @@ public class SeedStavbe
             // add the new to the DB context 
             if(nRow == 2)
             {
-                stavba.PhotoStavbe = fotke;
+                stavba.PhotosStavbe = fotke;
             }
             await context.Stavbe.AddAsync(stavba);
 

@@ -30,9 +30,11 @@ public class StavbaDto
     public string? KlasifikacijaCcSi { get; set; } = null!;
     public string? KlasifikacijaNaziv { get; set; } = null!;
     public decimal? PovrsinaAplikacija { get; set; }
+    public string? Opomba { get; set; } = null!;
 
     #region Navigation Properties
-    public List<PhotoStavbe>? PhotoStavbe { get; set; } = null!;
+    public List<PhotoDto>? PhotosStavbe { get; set; }
+
 
     public ICollection<MerilnoMestoDto>? MerilnaMesta { get; set; } = null!;
 

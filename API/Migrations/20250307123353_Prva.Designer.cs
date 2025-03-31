@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250218095733_prva11")]
-    partial class prva11
+    [Migration("20250307123353_Prva")]
+    partial class Prva
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -394,7 +394,7 @@ namespace API.Migrations
 
                     b.HasIndex("StavbaId");
 
-                    b.ToTable("PhotoStavbe");
+                    b.ToTable("PhotosStavbe");
                 });
 
             modelBuilder.Entity("API.Entities.Stavba", b =>
@@ -552,7 +552,7 @@ namespace API.Migrations
             modelBuilder.Entity("API.Entities.PhotoStavbe", b =>
                 {
                     b.HasOne("API.Entities.Stavba", "Stavba")
-                        .WithMany("PhotoStavbe")
+                        .WithMany("PhotosStavbe")
                         .HasForeignKey("StavbaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -574,7 +574,7 @@ namespace API.Migrations
                 {
                     b.Navigation("MerilnaMesta");
 
-                    b.Navigation("PhotoStavbe");
+                    b.Navigation("PhotosStavbe");
                 });
 #pragma warning restore 612, 618
         }

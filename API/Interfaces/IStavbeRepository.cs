@@ -6,9 +6,11 @@ namespace API.Interfaces;
 
 public interface IStavbeRepository
 {
-    // void Update(Stavba stavba);
     Task<bool> SaveAllAsync();
     Task<IEnumerable<StavbaDto>> GetStavbeAsync();
-    Task<StavbaDto?> GetStavbaByIdAsync(int id);
-    Task<StavbaDto?> GetStavbaByNazivAsync(string nazivStavbe);
+    Task<Stavba?> GetStavbaByIdAsync(int id);
+    Task<StavbaDto?> GetStavbaDtoByIdAsync(int id);
+    Task<Stavba?> GetStavbaByNazivAsync(string nazivStavbe);
+    Task<StavbaDto?> GetStavbaDtoByNazivAsync(string nazivStavbe);
+  //  Task<Stavba> UpdateAsync(Stavba stavba);
 }

@@ -64,7 +64,7 @@ public class Stavba
     // public ICollection<MojElektroMerilnoMesto>? MojElektroMerilnaMesta { get; set; } = null!;
     // public ICollection<GeoTocka> GeoTocke { get; set; } = null!;
 
-    public List<PhotoStavbe> PhotoStavbe { get; set; } = [];
+    public List<PhotoStavbe> PhotosStavbe { get; set; } = [];
 
 
     #endregion

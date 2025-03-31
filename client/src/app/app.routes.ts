@@ -13,6 +13,7 @@ import { StavbeListComponent } from './stavbe/stavbe-list/stavbe-list.component'
 import { StavbaDetailComponent } from './stavbe/stavba-detail/stavba-detail.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { preventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
+import { StavbaEditComponent } from './stavbe/stavba-edit/stavba-edit.component';
 // import { preventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 // import { memberDetailedResolver } from './_resolvers/member-detailed.resolver';
 // import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
@@ -27,7 +28,8 @@ export const routes: Routes = [
         children: [
             {path: 'stavbe', component: StavbeListComponent},
             {path: 'stavbe/:naziv', component: StavbaDetailComponent},
-
+            {path: 'stavba/edit', component: StavbaEditComponent,
+                canDeactivate: [preventUnsavedChangesGuard]}, 
 
             {path: 'members', component: MemberListComponent},
             {path: 'members/:username', component: MemberDetailComponent, 

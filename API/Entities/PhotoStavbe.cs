@@ -1,8 +1,8 @@
-using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Entities;
-[Table("PhotoStavbe")]
+
+[Table("PhotosStavbe")]
 public class PhotoStavbe
 {
     public int Id { get; set; }
@@ -13,6 +13,5 @@ public class PhotoStavbe
     // navigation properties
     public int StavbaId { get; set; }
     public Stavba Stavba { get; set; } = null!;   // null forgiving operator
-
 
 }

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { Stavba } from '../../_models/stavba';
 import { RouterLink } from '@angular/router';
 
@@ -9,6 +9,9 @@ import { RouterLink } from '@angular/router';
     styleUrl: './stavba-card.component.css'
 })
 export class StavbaCardComponent {
+  
   stavba = input.required<Stavba>();
+
+
 
 }

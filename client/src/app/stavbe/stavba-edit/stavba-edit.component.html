@@ -1,0 +1,123 @@
+@if (stavba) {
+    <div class="row">
+        <div class="col-4">
+            <h1>Javni objekt</h1>
+        </div>
+        <div class="col-8">
+            @if (editForm?.dirty) {
+                <div class="alert alert-info pb-0">
+                    <p><strong>Information: </strong>
+                        Vse neshranjene spremembe bodo izgubljene !</p>
+                </div>
+            }
+        </div>
+
+        <div class="col-4">
+            <div class="card">
+                <img 
+                    src="{{ stavba.photoUrl || './assets/user.png'}}" 
+                    alt="{{stavba.sifraJavnegaObjekta}}"
+                    class="card-img img-thumbnail"
+                >
+                <div class="card-body">
+                    <div>
+                        <strong>Naziv:</strong>
+                        <p>{{stavba.naziv}}</p>
+                    </div>
+                    <div>
+                        <strong>Neto tloris:</strong>
+                        <p>{{stavba.ntP_NetoTloris}}</p>
+                    </div>
+                    <div>
+                        <strong>Uporabna površina:</strong>
+                        <p>{{stavba.uporabnaPovrsina}}</p>
+                    </div>
+                    <div>
+                        <strong>Vrsta javnega objekta:</strong>
+                        <p>{{stavba.vrstaObjekta}}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button 
+                        [disabled]="!editForm?.dirty"
+                        form="editForm" type="submit" 
+                        class="btn btn-success col-12">
+                        Shrani spremembe
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-8">
+            <tabset class="member-tabset">
+                <tab heading="O stavbi {{stavba.naziv}}">
+                    <form id="editForm" #editForm="ngForm" (ngSubmit)="updateStavba()">
+                        <h4 class="mt-2">Naziv</h4>
+
+                        <div class="d-flex" allign-items-center>
+                            <label>Id:</label>
+                            <input type="text" 
+                                class="form-control mx-2" 
+                                name="Id" 
+                                [(ngModel)]="stavba.id"
+                                >
+
+                            <label>Naziv:</label>
+                            <input type="text" 
+                                class="form-control mx-2" 
+                                name="Naziv" 
+                                [(ngModel)]="stavba.naziv"
+                                >
+                            <label>Naslov:</label>
+                            <input type="text" 
+                                class="form-control mx-2" 
+                                name="Naslov" 
+                                [(ngModel)]="stavba.naslov"
+                                >
+                                <label>Ulica Hs:</label>
+                                <input type="text" 
+                                    class="form-control mx-2" 
+                                    name="UlicaHs" 
+                                    [(ngModel)]="stavba.ulicaHs"
+                                >
+    
+                        </div>
+
+                        <h4 class="mt-2">Naslov</h4>
+                        <textarea 
+                            class="form-control" 
+                            name="Naslov" 
+                            [(ngModel)]="stavba.naslov"
+                            >
+                        </textarea>
+                        <h4 class="mt-2">Opombe</h4>
+                        <textarea 
+                            class="form-control" 
+                            name="Opomba" 
+                            [(ngModel)]="stavba.opomba"
+                            >
+                        </textarea>
+                    </form>
+                </tab>
+                <tab heading="Google maps">
+                    <h4>Google maps</h4>
+                    <p>Lokacija v Google</p>
+                </tab>
+                <tab heading="Edit photos">
+                    <app-photo-editor-stavbe 
+                        [stavba]="stavba"
+                        (stavbaChange)="onStavbaChange($event)">
+                    </app-photo-editor-stavbe>
+                </tab>
+                
+            </tabset>
+        </div>
+
+
+
+
+    </div>
+
+
+
+}

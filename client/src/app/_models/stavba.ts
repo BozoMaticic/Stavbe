@@ -9,6 +9,7 @@ export interface Stavba {
     naslov: string
     ulicaHs: string
     photoUrl: string
+    
     katastrskaObcinaSifra: string
     katastrskaObcinaIme: string
     sT_OBJ_Gurs: string
@@ -26,7 +27,8 @@ export interface Stavba {
     klasifikacijaCcSi: any
     klasifikacijaNaziv: any
     povrsinaAplikacija: number
+    opomba: string
     merilnaMesta: MerilnoMesto[]
-    photoStavbe: Photo[]
+    photosStavbe: Photo[]
   }
   

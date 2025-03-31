@@ -16,14 +16,15 @@ public class AutoMapperProfiles : Profile
                 o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain)!.Url));
 
         CreateMap<Photo, PhotoDto>();
+        CreateMap<PhotoStavbe, PhotoDto>();
 
         CreateMap<MemberUpdateDto, AppUser>();
+        CreateMap<StavbaUpdateDto, Stavba>();
 
         CreateMap<Stavba, StavbaDto>()
             .ForMember(s => s.PhotoUrl, d =>
-                 d.MapFrom(s => s.PhotoStavbe.FirstOrDefault(x => x.IsMain)!.Url));
+                 d.MapFrom(s => s.PhotosStavbe.FirstOrDefault(x => x.IsMain)!.Url));
 
-        CreateMap<PhotoStavbe, PhotoStavbeDto>();
         CreateMap<MerilnoMesto, MerilnoMestoDto>();
     }
 }
