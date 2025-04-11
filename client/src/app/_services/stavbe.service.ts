@@ -4,6 +4,8 @@ import { environment } from '../../environments/environment';
 import { Stavba } from '../_models/stavba';
 import { of, tap } from 'rxjs';
 import { Photo } from '../_models/photo';
+import { PaginatedResult } from '../_models/pagination';
+import { StavbaParams } from '../_models/stavbaParams';
 
 @Injectable({
   providedIn: 'root'
@@ -11,72 +13,99 @@ import { Photo } from '../_models/photo';
 export class StavbeService {
   private http = inject(HttpClient);
   baseUrl = environment.apiUrl;
-  stavbe = signal<Stavba[]>([]);
+  // stavbe = signal<Stavba[]>([]);
+  paginatedResult = signal<PaginatedResult<Stavba[]> | null>(null)
   stavbaNaziv = signal<string>("");
   stavbaIdSignal = signal<number>(0);
+  stavbaSignal = signal<Stavba | null>(null);
 
 
-  getStavbe() {
-    return this.http.get<Stavba[]>(this.baseUrl + 'stavbe')
+  getStavbe(stavbaParams: StavbaParams) {
+    let params = this.setPaginationHeaders(stavbaParams.pageNumber, stavbaParams.pageSize);
+    params = params.append('vrstaObjekta', stavbaParams.vrstaObjekta);
+    params = params.append('ogrevanjeOznaka', stavbaParams.ogrevanjeOznaka);
+
+    return this.http.get<Stavba[]>(this.baseUrl + 'stavbe', { observe: 'response', params })
       .subscribe({
-        next: (stavbe) => {
-          this.stavbe.set(stavbe);
+        next: response => {
+          this.paginatedResult.set({
+            items: response.body as Stavba[],
+            pagination: JSON.parse(response.headers.get('Pagination')!)
+          })
         }
       })
   }
 
+  private setPaginationHeaders(pageNumber: number, pageSize: number) {
+    let params = new HttpParams();
+
+    if (pageNumber && pageSize) {
+      params = params.append('pageNumber', pageNumber);
+      params = params.append('pageSize', pageSize);
+    }
+
+    return params;
+  }
+
+
   getStavbaPoNazivu(naziv: string) {
-    const stavba = this.stavbe().find(x => x.naziv === naziv);
-    if (stavba !== undefined) return of(stavba);
+    // const stavba = this.stavbe().find(x => x.naziv === naziv);
+    // if (stavba !== undefined) return of(stavba);
     return this.http.get<Stavba>(this.baseUrl + 'stavbe/' + naziv);
   }
 
   getStavba(id: number) {
-    const stavba = this.stavbe().find(x => x.id === id);
-    if (stavba !== undefined) return of(stavba);
+    // const stavba = this.stavbe().find(x => x.id === id);
+    // if (stavba !== undefined) return of(stavba);
     return this.http.get<Stavba>(this.baseUrl + 'stavbe/' + id);
   }
 
   updateStavba(stavba: Stavba) {
     return this.http.put(this.baseUrl + 'stavbe', stavba).pipe(
-      tap(() => {
-        this.stavbe.update(stavbe => stavbe.map(s => s.naziv === stavba.naziv
-          ? stavba : s))
-      })
+      // tap(() => {
+      //   this.stavbe.update(stavbe => stavbe.map(s => s.naziv === stavba.naziv
+      //     ? stavba : s))
+      // })
     )
   }
 
 
   setMainPhoto(photo: Photo) {
-    // const parametri = new HttpParams()
-    // .set('stavbaNaziv', `${this.stavbaNaziv()}`)
-   // .set('PhotoId', `${photo.id}`)
 
    const idStavbeInIdPhoto = this.stavbaIdSignal().toString() + " " + photo.id.toString()
 
     return this.http.put(this.baseUrl + 'stavbe/set-main-photo/'+ idStavbeInIdPhoto, {}).pipe(
-      tap(() => {
-        this.stavbe.update(stavbe => stavbe.map(m => {
-          if (m.photosStavbe.includes(photo)) {
-            m.photoUrl = photo.url
-          }
-          return m;
-        }))
-      })
+      // tap(() => {
+      //   this.stavbe.update(stavbe => stavbe.map(m => {
+      //     if (m.photosStavbe.includes(photo)) {
+      //       m.photoUrl = photo.url
+      //     }
+      //     return m;
+      //   }))
+      // })
     )
   }
 
-  // deletePhoto(photo: Photo) {
-  //   return this.http.delete(this.baseUrl + 'stavbe/delete-photo/' + photo.id).pipe(
-  //     tap(() => {
-  //       this.stavbe.update(stavbe => stavbe.map(m => {
-  //         if (m.photosStavbe.includes(photo)) {
-  //           m.photosStavbe = m.photosStavbe.filter(x => x.id !== photo.id)
-  //         }
-  //         return m
-  //       }))
-  //     })
-  //   )
-  // }
+  deletePhoto(photo: Photo) {
+
+    const idStavbeInIdPhoto = this.stavbaIdSignal().toString() + " " + photo.id.toString()
+    return this.http.delete(this.baseUrl + 'stavbe/delete-photo/' + idStavbeInIdPhoto).pipe(
+      // tap(() => {
+      //   this.stavbe.update(stavbe => stavbe.map(m => {
+      //     if (m.photosStavbe.includes(photo)) {
+      //       m.photosStavbe = m.photosStavbe.filter(x => x.id !== photo.id)
+      //     }
+      //     return m
+      //   }))
+      // })
+    )
+  }
 
 }
+
+
+
+    // const parametri = new HttpParams()
+    // .set('stavbaNaziv', `${this.stavbaNaziv()}`)
+   // .set('PhotoId', `${photo.id}`)
+

@@ -15,11 +15,11 @@ export interface Stavba {
     sT_OBJ_Gurs: string
     ntP_NetoTloris: number
     uporabnaPovrsina: number
-    vrstaObjekta: string
+    vrstaObjekta: string      // vrsta objekta
     vrstaObjektaId: number
     ogrevanje: string
     ogrevanjeId: any
-    ogrevanjeOznaka: string
+    ogrevanjeOznaka: string   // oznaka ogrevanja
     parcelePovrsina: number
     stavbaDaNe: boolean
     stavbaStevilka: any

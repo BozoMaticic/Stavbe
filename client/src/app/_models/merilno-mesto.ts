@@ -17,7 +17,6 @@ import { Stavba } from "./stavba"
     dobaviteljNaziv: any
     obracunskaMoc: number
     
-    stavba: Stavba
     idStavbe: number
     odcitki: any[]
   }

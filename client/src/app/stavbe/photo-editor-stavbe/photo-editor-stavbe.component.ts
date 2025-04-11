@@ -26,22 +26,23 @@ export class PhotoEditorStavbeComponent implements OnInit {
   ngOnInit(): void {
     this.initializeUploader();
     this.stavbeService.stavbaIdSignal.set(this.stavba().id);
+    this.stavbeService.stavbaSignal.set(this.stavba());
   }
 
   fileOverBase(e: any) {
     this.hasBaseDropZoneOver = e;
   }
 
-  // deletePhoto(photo: Photo){
-  //   this.stavbeService.deletePhoto(photo).subscribe({
-  //     next: _ => {
-  //       const updatedStavba = {...this.stavba()};
-  //       updatedStavba.photosStavbe = updatedStavba.photosStavbe
-  //         .filter(x => x.id !== photo.id);
-  //       this.stavbaChange.emit(updatedStavba);
-  //     }
-  //   })
-  // }
+  deletePhoto(photo: Photo){
+    this.stavbeService.deletePhoto(photo).subscribe({
+      next: _ => {
+        const updatedStavba = {...this.stavba()};
+        updatedStavba.photosStavbe = updatedStavba.photosStavbe
+          .filter(x => x.id !== photo.id);
+        this.stavbaChange.emit(updatedStavba);
+      }
+    })
+  }
 
   setMainPhoto(photo: Photo) {
     this.stavbeService.stavbaNaziv.set(this.stavba().naziv);

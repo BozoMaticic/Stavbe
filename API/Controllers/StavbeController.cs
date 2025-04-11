@@ -2,21 +2,23 @@ using System;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
-
+[Authorize]
 public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper, 
     IPhotoService photoService) : BaseApiController
 {
-    [AllowAnonymous]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<StavbaDto>>> GetStavbe()
+    public async Task<ActionResult<IEnumerable<StavbaDto>>> GetStavbe([FromQuery]StavbaParams stavbaParams)
     {
-        var stavbe = await stavbeRepository.GetStavbeAsync();
+        var stavbe = await stavbeRepository.GetStavbeAsync(stavbaParams);
+        Response.AddPaginationHeader(stavbe);
         return Ok(stavbe);
     }
 
@@ -27,6 +29,17 @@ public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper
         if (stavba == null) return NotFound();
         return stavba;
     }
+
+    [HttpGet("merilnaMesta/{nazivStavbe}")]
+
+    public async Task<ActionResult<MerilnoMestoDto[]>> GetMerilnaMesta(string nazivStavbe)
+    {
+        var merMesta = await stavbeRepository.GetMerilnaMesta(nazivStavbe);
+        if (merMesta == null) return NotFound();
+        return Ok(merMesta);
+    }
+
+
 
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Stavba>> GetStavba(int id)
@@ -98,28 +111,31 @@ public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper
         return BadRequest("Problem setting main photo za stavbo");
     }
 
-    //  [HttpDelete("delete-photo/{photoId:int}")]
-    //  public async Task<ActionResult> DeletePhoto(int photoId)
-    //  {
-    //     var user = await userRepository.GetUserByNameAsync(User.GetUserName());
-    //     if (user == null) return BadRequest("User not found");
-        
-    //     var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
-    //     if (photo == null || photo.IsMain) return BadRequest("This photo cannot be deleted");
+     [HttpDelete("delete-photo/{idStavbeIdFoto}")]
+     public async Task<ActionResult> DeletePhoto(string idStavbeIdFoto)
+     {
+        var stavbaId = int.Parse(idStavbeIdFoto.Split(' ')[0]) ;
+        var photoId = int.Parse(idStavbeIdFoto.Split(' ')[1]);
 
-    //     if (photo.PublicId != null)
-    //     {
-    //         var result = await photoService.DeletePhotoAsync(photo.PublicId);
-    //         if (result.Error != null) return BadRequest(result.Error.Message);
-    //     }
+        if (stavbaId == 0) return BadRequest("Stavba ne obstaja");
+        if (photoId == 0) return BadRequest("PhotoId ne obstaja");
 
-    //     user.Photos.Remove(photo);
+        var stavba = await stavbeRepository.GetStavbaByIdAsync(stavbaId);
+        if (stavba == null) return BadRequest("Stavba ne obstaja");
+        var photo = stavba.PhotosStavbe.FirstOrDefault(x => x.Id == photoId);
+        if (photo == null || photo.IsMain) return BadRequest("This photo cannot be deleted");
 
-    //     if (await userRepository.SaveAllAsync()) return Ok();
+        if (photo.PublicId != null)
+        {
+            var result = await photoService.DeletePhotoAsync(photo.PublicId);
+            if (result.Error != null) return BadRequest(result.Error.Message);
+        }
 
-    //     return BadRequest("Problem deleting photo");
-    //  }
+        stavba.PhotosStavbe.Remove(photo);
 
+        if (await stavbeRepository.SaveAllAsync()) return Ok();
 
-
+        return BadRequest("Problem deleting photo");
+     }
+     
 }

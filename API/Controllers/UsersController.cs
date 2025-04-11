@@ -12,14 +12,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
-
+[Authorize]
 public class UsersController(IUserRepository userRepository, IMapper mapper, 
     IPhotoService photoService) : BaseApiController
 {
-    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
     {
+        userParams.CurrentUsername = User.GetUserName();
         var users = await userRepository.GetMembersAync(userParams);
         Response.AddPaginationHeader(users);
         return Ok(users);

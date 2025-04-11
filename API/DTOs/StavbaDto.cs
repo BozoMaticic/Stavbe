@@ -18,11 +18,11 @@ public class StavbaDto
     public string? ST_OBJ_Gurs { get; set; } = null!;
     public decimal? NTP_NetoTloris { get; set; }
     public decimal? UporabnaPovrsina { get; set; }
-    public string VrstaObjekta { get; set; } = null!;
+    public string VrstaObjekta { get; set; } = null!;           // za prikaz v dropdownu
     public int VrstaObjektaId { get; set; }
     public string? Ogrevanje { get; set; } = null!;
     public int? OgrevanjeId { get; set; }
-    public string? OgrevanjeOznaka { get; set; } = null!;
+    public string? OgrevanjeOznaka { get; set; } = null!;       // za prikaz v dropdownu
     public decimal? ParcelePovrsina { get; set; }
     public bool? StavbaDaNe { get; set; }
     public string? StavbaStevilka { get; set; } = null!;
