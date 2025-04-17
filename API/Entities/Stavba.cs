@@ -62,7 +62,7 @@ public class Stavba
     #region Navigation Properties
     public ICollection<MerilnoMesto>? MerilnaMesta { get; set; } = null!;
     // public ICollection<MojElektroMerilnoMesto>? MojElektroMerilnaMesta { get; set; } = null!;
-    // public ICollection<GeoTocka> GeoTocke { get; set; } = null!;
+    public ICollection<GeoTocka> GeoTocke { get; set; } = null!;
 
     public List<PhotoStavbe> PhotosStavbe { get; set; } = [];
 

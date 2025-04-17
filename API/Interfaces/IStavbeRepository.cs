@@ -14,5 +14,6 @@ public interface IStavbeRepository
     Task<Stavba?> GetStavbaByNazivAsync(string nazivStavbe);
     Task<StavbaDto?> GetStavbaDtoByNazivAsync(string nazivStavbe);
     Task<MerilnoMestoDto[]> GetMerilnaMesta(string nazivStavbe);
+    Task<Poligon> GetGeoTocke(string nazivStavbe);
   //  Task<Stavba> UpdateAsync(Stavba stavba);
 }

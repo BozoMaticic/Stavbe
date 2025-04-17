@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 [Authorize]
-public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper, 
+public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper,
     IPhotoService photoService) : BaseApiController
 {
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<StavbaDto>>> GetStavbe([FromQuery]StavbaParams stavbaParams)
+    public async Task<ActionResult<IEnumerable<StavbaDto>>> GetStavbe([FromQuery] StavbaParams stavbaParams)
     {
         var stavbe = await stavbeRepository.GetStavbeAsync(stavbaParams);
         Response.AddPaginationHeader(stavbe);
@@ -30,13 +30,21 @@ public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper
         return stavba;
     }
 
-    [HttpGet("merilnaMesta/{nazivStavbe}")]
+    [HttpGet("merilna-mesta/{nazivStavbe}")]
 
     public async Task<ActionResult<MerilnoMestoDto[]>> GetMerilnaMesta(string nazivStavbe)
     {
         var merMesta = await stavbeRepository.GetMerilnaMesta(nazivStavbe);
         if (merMesta == null) return NotFound();
         return Ok(merMesta);
+    }
+
+    [HttpGet("geo-tocke/{nazivStavbe}")]
+    public async Task<ActionResult<GeoTockaDto[]>> GetGeoTocke(string nazivStavbe)
+    {
+        var stavba = await stavbeRepository.GetGeoTocke(nazivStavbe);
+        if (stavba == null) return NotFound();
+        return Ok(stavba);
     }
 
 
@@ -61,9 +69,9 @@ public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper
     }
 
     [HttpPost("add-photo/{naziv}")]
-    public async Task<ActionResult<PhotoDto>> AddPhoto([FromQuery]IFormFile file, string naziv)
+    public async Task<ActionResult<PhotoDto>> AddPhoto([FromQuery] IFormFile file, string naziv)
     {
-       // var id = 3; // vzamemo prvo stavbo za testiranje
+        // var id = 3; // vzamemo prvo stavbo za testiranje
 
         var stavba = await stavbeRepository.GetStavbaByNazivAsync(naziv);
         if (stavba == null) return BadRequest("Cannot update stavba");
@@ -81,7 +89,7 @@ public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper
 
         if (await stavbeRepository.SaveAllAsync())
         {
-            return CreatedAtAction(nameof(GetStavba), 
+            return CreatedAtAction(nameof(GetStavba),
                 new { id = stavba.Id }, mapper.Map<PhotoDto>(photoStavbe));
         }
         return BadRequest("Problem adding photo");
@@ -90,13 +98,13 @@ public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper
     [HttpPut("set-main-photo/{idStavbeIdFoto}")]
     public async Task<ActionResult> SetMainPhoto(string idStavbeIdFoto)
     {
-        var stavbaId = int.Parse(idStavbeIdFoto.Split(' ')[0]) ;
+        var stavbaId = int.Parse(idStavbeIdFoto.Split(' ')[0]);
         var photoId = int.Parse(idStavbeIdFoto.Split(' ')[1]);
         //var stavbaNaziv = "Občina Kamnik"; // testiranje
 
         if (stavbaId == 0) return BadRequest("Stavba ne obstaja");
         if (photoId == 0) return BadRequest("PhotoId ne obstaja");
-        
+
         var stavba = await stavbeRepository.GetStavbaByIdAsync(stavbaId);
         if (stavba == null) return BadRequest("Stavba ne obstaja");
         var photo = stavba.PhotosStavbe.FirstOrDefault(x => x.Id == photoId);
@@ -111,10 +119,10 @@ public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper
         return BadRequest("Problem setting main photo za stavbo");
     }
 
-     [HttpDelete("delete-photo/{idStavbeIdFoto}")]
-     public async Task<ActionResult> DeletePhoto(string idStavbeIdFoto)
-     {
-        var stavbaId = int.Parse(idStavbeIdFoto.Split(' ')[0]) ;
+    [HttpDelete("delete-photo/{idStavbeIdFoto}")]
+    public async Task<ActionResult> DeletePhoto(string idStavbeIdFoto)
+    {
+        var stavbaId = int.Parse(idStavbeIdFoto.Split(' ')[0]);
         var photoId = int.Parse(idStavbeIdFoto.Split(' ')[1]);
 
         if (stavbaId == 0) return BadRequest("Stavba ne obstaja");
@@ -136,6 +144,6 @@ public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper
         if (await stavbeRepository.SaveAllAsync()) return Ok();
 
         return BadRequest("Problem deleting photo");
-     }
-     
+    }
+
 }

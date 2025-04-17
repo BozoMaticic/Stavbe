@@ -14,11 +14,11 @@
                     </div>
                     <div>
                         <strong>Neto tloris:</strong>
-                        <p>{{stavba.ntP_NetoTloris}}</p>
+                        <p>{{stavba.ntP_NetoTloris  | number:'1.2-2':'sl'}} m²</p>
                     </div>
                     <div>
                         <strong>Uporabna površina:</strong>
-                        <p>{{stavba.uporabnaPovrsina}}</p>
+                        <p>{{stavba.uporabnaPovrsina  | number:'1.2-2':'sl'}} m²</p>
                     </div>
                     <div>
                         <strong>Vrsta javnega objekta:</strong>
@@ -44,14 +44,17 @@
                 </tab>
                 <tab heading="Merilna mesta">
                     <h4>Merilna mesta</h4>
+                    <app-merilna-mesta-list></app-merilna-mesta-list>
                 </tab>
                 <tab heading="Moj elektro">
                     <h4>Moj elektro</h4>
                 </tab>
                 <tab heading="Slike" #photoTab="tab">
                     @if (photoTab.active) {
-                        <gallery [items]="images"
-                        class="gallery">
+                        <gallery 
+                            [items]="images"
+                            [itemAutosize]="true"
+                            class="gallery">
                         </gallery>
                     }
                 </tab>

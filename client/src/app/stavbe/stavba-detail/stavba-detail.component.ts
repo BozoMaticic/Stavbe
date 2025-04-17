@@ -1,24 +1,34 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, Inject, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { StavbeService } from '../../_services/stavbe.service';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { Stavba } from '../../_models/stavba';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GalleryModule, GalleryItem, ImageItem } from 'ng-gallery';
+import { MerilnaMestaListComponent } from "../../merilna-mesta/merilna-mesta-list/merilna-mesta-list.component";
+
+import { LOCALE_ID } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 @Component({
     selector: 'app-stavba-detail',
-    imports: [TabsModule, GalleryModule, RouterLink],
+    imports: [TabsModule, GalleryModule, CommonModule, RouterLink, MerilnaMestaListComponent],
     templateUrl: './stavba-detail.component.html',
     styleUrl: './stavba-detail.component.css'
 })
 export class StavbaDetailComponent {
+    constructor(@Inject(LOCALE_ID) public locale: string) { }
+    
+
     private stavbeService = inject(StavbeService);
     private route = inject(ActivatedRoute);
     stavba?: Stavba;
 
     images: GalleryItem[] = [];
+
   
     ngOnInit(): void {
+      
       this.loadStavba();
       if(!this.stavba) return;
       this.stavbeService.stavbaNaziv.set(this.stavba.naziv);

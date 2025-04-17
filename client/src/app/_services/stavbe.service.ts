@@ -6,6 +6,7 @@ import { of, tap } from 'rxjs';
 import { Photo } from '../_models/photo';
 import { PaginatedResult } from '../_models/pagination';
 import { StavbaParams } from '../_models/stavbaParams';
+import { MerilnoMesto } from '../_models/merilno-mesto';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,21 @@ export class StavbeService {
     // if (stavba !== undefined) return of(stavba);
     return this.http.get<Stavba>(this.baseUrl + 'stavbe/' + naziv);
   }
+
+  getMerilnaMestaStavbe(naziv: string) {
+    return this.http.get<MerilnoMesto[]>(this.baseUrl + 'stavbe/merilna-mesta/' + naziv);
+  }
+
+  getMerilnaMestaStavbeStevilo(naziv: string): number {
+    this.http.get<MerilnoMesto[]>(this.baseUrl + 'stavbe/merilna-mesta/' + naziv)
+    .pipe(
+      tap((x) => {
+        return (x.length)
+      })
+    )
+    return 0
+  }
+
 
   getStavba(id: number) {
     // const stavba = this.stavbe().find(x => x.id === id);

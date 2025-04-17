@@ -10,4 +10,5 @@ namespace API.Data;
         public DbSet<Stavba> Stavbe { get; set; }
         public DbSet<MerilnoMesto> MerilnaMesta { get; set; }
         public DbSet<Odcitek> Odcitki { get; set; }
+        public DbSet<GeoTocka> GeoTocke { get; set; } = null!;
     }

@@ -5,6 +5,7 @@ using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using CloudinaryDotNet.Actions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repos;
@@ -22,7 +23,7 @@ public class StavbeRepository(DataContext context, IMapper mapper) : IStavbeRepo
         {
             query = query.Where(x => x.VrstaObjekta == stavbaParams.VrstaObjekta);
         }
-        
+
         if (stavbaParams.TipOgrevanja != "vsi")
         {
             query = query.Where(x => x.OgrevanjeOznaka == stavbaParams.TipOgrevanja);
@@ -36,7 +37,7 @@ public class StavbeRepository(DataContext context, IMapper mapper) : IStavbeRepo
         return await context.Stavbe
         .Where(x => x.Naziv == nazivStavbe)
         .Include(x => x.PhotosStavbe)
-   //     .ProjectTo<StavbaDto>(mapper.ConfigurationProvider)
+        //     .ProjectTo<StavbaDto>(mapper.ConfigurationProvider)
         .SingleOrDefaultAsync();
     }
 
@@ -51,6 +52,49 @@ public class StavbeRepository(DataContext context, IMapper mapper) : IStavbeRepo
 
         return mapper.Map<MerilnoMestoDto[]>(stavba.MerilnaMesta);
     }
+
+    public async Task<Poligon> GetGeoTocke(string nazivStavbe)
+    {
+        var stavba = await context.Stavbe
+            .Where(x => x.Naziv == nazivStavbe)
+            .Include(x => x.GeoTocke)
+            .SingleOrDefaultAsync();
+
+        if (stavba?.GeoTocke == null) return null!;
+        Poligon _poligon = new Poligon();
+        _poligon.IdJavnegaObjekta = stavba.Id;
+        _poligon.Naziv = stavba.Naziv;
+
+        // za izris poligonov v GoogleMaps
+        var _vsiObodiObjekta = new List<List<Tocka>>();
+        var _obodObjekta = new List<Tocka>();
+
+        var _geoSortirane = stavba.GeoTocke.OrderBy(zap => zap.Zaporedje).ToList();
+        foreach (var geoTocka in _geoSortirane)
+        {
+            if (geoTocka.Ozn_tock == "nov poligon")     // ----------------------------------------------nov poligon
+            {
+                if (_obodObjekta.Count != 0)
+                {
+                    var pom = _obodObjekta.ToList();
+                    _vsiObodiObjekta.Add(pom);
+                    _obodObjekta.Clear();
+                }
+            }
+            _obodObjekta.Add(new Tocka { Lat = geoTocka.Lat, Lng = geoTocka.Lng });
+        }
+        var pom1 = _obodObjekta.ToList();
+        _vsiObodiObjekta.Add(pom1);
+        _obodObjekta.Clear();
+        _poligon.NoviObodiObjekta = _vsiObodiObjekta;
+
+        return _poligon;
+
+
+
+        // return mapper.Map<GeoTockaDto[]>(stavba.GeoTocke);
+    }
+
 
     public async Task<StavbaDto?> GetStavbaDtoByNazivAsync(string nazivStavbe)
     {
@@ -67,7 +111,7 @@ public class StavbeRepository(DataContext context, IMapper mapper) : IStavbeRepo
         return await context.Stavbe
         .Include(x => x.PhotosStavbe)
         .Where(x => x.Id == id)
-     //   .ProjectTo<StavbaDto>(mapper.ConfigurationProvider)
+        //   .ProjectTo<StavbaDto>(mapper.ConfigurationProvider)
         .SingleOrDefaultAsync();
     }
 

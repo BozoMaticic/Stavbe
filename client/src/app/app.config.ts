@@ -9,6 +9,12 @@ import { jwtInterceptor } from './_interceptors/jwt.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './_interceptors/loading.interceptor';
 
+import {  LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeSi from '@angular/common/locales/sl';
+registerLocaleData(localeSi);
+
+
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), 
@@ -18,6 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideToastr( {
       positionClass: 'toast-bottom-right'
     }),
-    importProvidersFrom(NgxSpinnerModule)
+    importProvidersFrom(NgxSpinnerModule),
+    { provide: LOCALE_ID, useValue: 'sl' },
   ]
 };

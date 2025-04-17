@@ -26,5 +26,6 @@ public class AutoMapperProfiles : Profile
                  d.MapFrom(s => s.PhotosStavbe.FirstOrDefault(x => x.IsMain)!.Url));
 
         CreateMap<MerilnoMesto, MerilnoMestoDto>();
+        CreateMap<GeoTocka, GeoTockaDto>();
     }
 }

@@ -44,6 +44,7 @@ try
     await Seed.SeedUsers(context);
     await SeedStavbe.Seed(context);
     await SeedMerilnaMesta.ImportMM(context);
+    await SeedGeoTocke.ImportGeo(context);
 }
 catch (Exception ex)
 {
