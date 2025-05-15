@@ -8,6 +8,7 @@
 
 # dotenv files
 .env
+index.html
 
 # User-specific files
 *.rsuser
