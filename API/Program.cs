@@ -45,6 +45,8 @@ try
     await SeedStavbe.Seed(context);
     await SeedMerilnaMesta.ImportMM(context);
     await SeedGeoTocke.ImportGeo(context);
+    await SeedMojElektroMMesta.ImportMM(context);
+    await SeedMojElektro15minMeritve.Import15minMeritve(context);
 }
 catch (Exception ex)
 {

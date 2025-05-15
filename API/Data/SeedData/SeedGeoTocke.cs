@@ -74,8 +74,17 @@ public class SeedGeoTocke
             {
                 pp = seznamStavb[_geoTocka.SifraObjekta];
                 Stavba? stavba = await context.Stavbe.FindAsync(pp);
-                _geoTocka.IdJavnegaObjekta = stavba.Id;
-                steviloDodanihGeoTock++;
+
+                if (stavba != null)
+                {
+                    _geoTocka.IdJavnegaObjekta = stavba.Id;
+                    steviloDodanihGeoTock++;
+                }
+                else
+                {
+                    steviloNeuspelih++;
+                    continue;
+                }
             }
             else
             {

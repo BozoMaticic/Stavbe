@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using API.Entities.MojElektro;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Entities;
@@ -61,11 +62,9 @@ public class Stavba
 
     #region Navigation Properties
     public ICollection<MerilnoMesto>? MerilnaMesta { get; set; } = null!;
-    // public ICollection<MojElektroMerilnoMesto>? MojElektroMerilnaMesta { get; set; } = null!;
+    public ICollection<MojElektroMerilnoMesto>? MojElektroMerilnaMesta { get; set; } = null!;
     public ICollection<GeoTocka> GeoTocke { get; set; } = null!;
-
     public List<PhotoStavbe> PhotosStavbe { get; set; } = [];
-
 
     #endregion
 }

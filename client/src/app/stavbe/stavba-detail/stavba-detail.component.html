@@ -38,18 +38,19 @@
 
         <div class="col-8">
             <tabset class="member-tabset">
-                <tab heading="Lokacija {{stavba.naziv}}">
-                    <h4>Google Maps </h4>
-                    <p>{{stavba.katastrskaObcinaIme}}</p>
+                <tab heading="Lokacija" [active]="true">
+                    <h4>{{stavba.naziv}}</h4>
+                    <app-poligon></app-poligon>
+                    
                 </tab>
                 <tab heading="Merilna mesta">
-                    <h4>Merilna mesta</h4>
+                    <h4>Merilna mesta za {{stavba.naziv}}</h4>
                     <app-merilna-mesta-list></app-merilna-mesta-list>
                 </tab>
                 <tab heading="Moj elektro">
                     <h4>Moj elektro</h4>
                 </tab>
-                <tab heading="Slike" #photoTab="tab">
+                <tab heading="Slike za {{stavba.naziv}}" #photoTab="tab">
                     @if (photoTab.active) {
                         <gallery 
                             [items]="images"

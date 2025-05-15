@@ -3,74 +3,81 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace API.Migrations
+namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250415173515_geotocke")]
-    partial class geotocke
+    [Migration("20250502122754_mojElektro")]
+    partial class mojElektro
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.1");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "9.0.4")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("date");
 
                     b.Property<string>("Gender")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Interests")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Introduction")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KnownAs")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("LastActive")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LookingFor")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("BLOB");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("PasswordSalt")
                         .IsRequired()
-                        .HasColumnType("BLOB");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -81,7 +88,9 @@ namespace API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal?>("DDLat")
                         .HasColumnType("decimal(9,6)");
@@ -90,13 +99,13 @@ namespace API.Migrations
                         .HasColumnType("decimal(9,6)");
 
                     b.Property<int?>("FID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("IdJavnegaObjekta")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("JavniObjektSifraJavnegaObjekta")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("Lat")
                         .HasColumnType("decimal(9,6)");
@@ -105,32 +114,32 @@ namespace API.Migrations
                         .HasColumnType("decimal(9,6)");
 
                     b.Property<string>("Naziv")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OZN_obj")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ozn_tock")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SID")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SIFKO")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ST_stevilka")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SifraMerilnegaMesta")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SifraObjekta")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Zaporedje")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -143,66 +152,68 @@ namespace API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Dobavitelj")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DobaviteljNaziv")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Energent")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("EnergentTip")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdJavnegaZavoda")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("IdStavbe")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<decimal?>("NadmorskaVisina")
                         .HasColumnType("decimal(7,4)");
 
                     b.Property<string>("NazivJavnegaObjekta")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NickName")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ObracunskaMoc")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Ogrevanje")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("OgrevanjeId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("OgrevanjeOznaka")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SifraJavnegaObjekta")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StMerilnegaMesta")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Type")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("ZemljepisnaDolzina")
                         .HasColumnType("decimal(7,4)");
@@ -217,14 +228,145 @@ namespace API.Migrations
                     b.ToTable("MerilnaMesta");
                 });
 
+            modelBuilder.Entity("API.Entities.MojElektro.MojElektro15MinMeritev", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Blok")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Energija_A_minus")
+                        .HasColumnType("decimal(7,4)");
+
+                    b.Property<decimal>("Energija_A_plus")
+                        .HasColumnType("decimal(7,4)");
+
+                    b.Property<decimal>("Energija_R_minus")
+                        .HasColumnType("decimal(7,4)");
+
+                    b.Property<decimal>("Energija_R_plus")
+                        .HasColumnType("decimal(7,4)");
+
+                    b.Property<int>("IdMerilnegaMesta")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdMerilnegaMestaMojElektro")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Leto")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LetoDanUra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LetoMesec")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LetoMesecBlok")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LetoTedenDan")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LetoTedenDanUra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Mesec")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("OddanaDelovnaMoc")
+                        .HasColumnType("decimal(7,4)");
+
+                    b.Property<decimal>("OddanaJalovaMoc")
+                        .HasColumnType("decimal(7,4)");
+
+                    b.Property<decimal>("PrejetaDelovnaMoc")
+                        .HasColumnType("decimal(7,4)");
+
+                    b.Property<decimal>("PrejetaJalovaMoc")
+                        .HasColumnType("decimal(7,4)");
+
+                    b.Property<string>("StMerilnegaMesta")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdMerilnegaMestaMojElektro");
+
+                    b.ToTable("MojElektro15MinMeritve");
+                });
+
+            modelBuilder.Entity("API.Entities.MojElektro.MojElektroMerilnoMesto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Dobavitelj")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EnotniIdentifikator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GsrnMM")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdJavnegaObjekta")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NNizvod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Naslov")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Naziv")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NazivJavnegaObjekta")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RTP")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SNizvod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SifraJavnegaObjekta")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TP")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdJavnegaObjekta");
+
+                    b.ToTable("MojElektroMerilnaMesta");
+                });
+
             modelBuilder.Entity("API.Entities.Odcitek", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("DOEnergijaEuro")
                         .HasColumnType("decimal(9,2)");
@@ -233,7 +375,7 @@ namespace API.Migrations
                         .HasColumnType("decimal(9,2)");
 
                     b.Property<DateTime>("DatumOdcitka")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("ELEEnergijaEUR")
                         .HasColumnType("decimal(9,2)");
@@ -263,23 +405,23 @@ namespace API.Migrations
                         .HasColumnType("decimal(9,2)");
 
                     b.Property<string>("ElkoLbUnpEnotaMere")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("ElkoLbUnpKolicina")
                         .HasColumnType("decimal(9,2)");
 
                     b.Property<string>("EnergentTip")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal?>("Energija")
                         .HasColumnType("decimal(9,2)");
 
                     b.Property<int>("IdJavnegaObjekta")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("IdMerilnegaMesta")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<decimal?>("KANALCCNOmrezninaEur")
                         .HasColumnType("decimal(9,2)");
@@ -298,17 +440,17 @@ namespace API.Migrations
 
                     b.Property<string>("LetoMesec")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("NazivMerilnegaMesta")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ObdobjeStoritveDo")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ObdobjeStoritveOd")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("PLINDistribucija")
                         .HasColumnType("decimal(9,2)");
@@ -341,7 +483,7 @@ namespace API.Migrations
                         .HasColumnType("decimal(9,2)");
 
                     b.Property<string>("SMETIOpomba")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("SMETIPapirKartonEur")
                         .HasColumnType("decimal(9,2)");
@@ -357,22 +499,22 @@ namespace API.Migrations
 
                     b.Property<string>("StMerilnegaMesta")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("StevilkaRacuna")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TipOgrevanja")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TipOgrevanjaOznaka")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Type")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("VODAOmrezninaEur")
                         .HasColumnType("decimal(9,2)");
@@ -411,20 +553,22 @@ namespace API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AppUserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsMain")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<string>("PublicId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -437,20 +581,22 @@ namespace API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("IsMain")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<string>("PublicId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StavbaId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Url")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -463,34 +609,36 @@ namespace API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("KatastrskaObcinaIme")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KatastrskaObcinaSifra")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KlasifikacijaCcSi")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KlasifikacijaNaziv")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KlimatskiKraj")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("KondicioniranaPovrsina")
                         .HasColumnType("decimal(7,2)");
 
                     b.Property<string>("LetoIzgradnje")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LetoObnove")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("NTP_NetoTloris")
                         .HasColumnType("decimal(7,2)");
@@ -499,32 +647,32 @@ namespace API.Migrations
                         .HasColumnType("decimal(7,4)");
 
                     b.Property<string>("Naslov")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Naziv")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NazivEnote")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ogrevanje")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OgrevanjeDrugi")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("OgrevanjeId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("OgrevanjeOznaka")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Opomba")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Parcele")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("ParcelePovrsina")
                         .HasColumnType("decimal(7,2)");
@@ -536,36 +684,36 @@ namespace API.Migrations
                         .HasColumnType("decimal(7,2)");
 
                     b.Property<string>("ST_OBJ_Gurs")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SifraJavnegaObjekta")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("StavbaDaNe")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<string>("StavbaDel")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StavbaStevilka")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UlicaHs")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("UporabnaPovrsina")
                         .HasColumnType("decimal(7,2)");
 
                     b.Property<string>("VrstaObjekta")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VrstaObjektaId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<decimal?>("ZemljepisnaDolzina")
                         .HasColumnType("decimal(7,4)");
@@ -594,6 +742,28 @@ namespace API.Migrations
                     b.HasOne("API.Entities.Stavba", "Stavba")
                         .WithMany("MerilnaMesta")
                         .HasForeignKey("IdStavbe")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stavba");
+                });
+
+            modelBuilder.Entity("API.Entities.MojElektro.MojElektro15MinMeritev", b =>
+                {
+                    b.HasOne("API.Entities.MojElektro.MojElektroMerilnoMesto", "MerilnoMestoMojElektro")
+                        .WithMany("Meritve15min")
+                        .HasForeignKey("IdMerilnegaMestaMojElektro")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MerilnoMestoMojElektro");
+                });
+
+            modelBuilder.Entity("API.Entities.MojElektro.MojElektroMerilnoMesto", b =>
+                {
+                    b.HasOne("API.Entities.Stavba", "Stavba")
+                        .WithMany("MojElektroMerilnaMesta")
+                        .HasForeignKey("IdJavnegaObjekta")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -643,11 +813,18 @@ namespace API.Migrations
                     b.Navigation("Odcitki");
                 });
 
+            modelBuilder.Entity("API.Entities.MojElektro.MojElektroMerilnoMesto", b =>
+                {
+                    b.Navigation("Meritve15min");
+                });
+
             modelBuilder.Entity("API.Entities.Stavba", b =>
                 {
                     b.Navigation("GeoTocke");
 
                     b.Navigation("MerilnaMesta");
+
+                    b.Navigation("MojElektroMerilnaMesta");
 
                     b.Navigation("PhotosStavbe");
                 });

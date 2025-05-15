@@ -9,10 +9,11 @@ import { MerilnaMestaListComponent } from "../../merilna-mesta/merilna-mesta-lis
 
 import { LOCALE_ID } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { PoligonComponent } from "../../geo-tocke/poligon/poligon.component";
 
 @Component({
     selector: 'app-stavba-detail',
-    imports: [TabsModule, GalleryModule, CommonModule, RouterLink, MerilnaMestaListComponent],
+    imports: [TabsModule, GalleryModule, CommonModule, RouterLink, MerilnaMestaListComponent, PoligonComponent],
     templateUrl: './stavba-detail.component.html',
     styleUrl: './stavba-detail.component.css'
 })

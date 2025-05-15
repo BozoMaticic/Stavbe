@@ -7,7 +7,7 @@ import { Photo } from '../_models/photo';
 import { PaginatedResult } from '../_models/pagination';
 import { StavbaParams } from '../_models/stavbaParams';
 import { MerilnoMesto } from '../_models/merilno-mesto';
-
+import { Ipoligon } from '../_models/poligon';
 @Injectable({
   providedIn: 'root'
 })
@@ -69,6 +69,9 @@ export class StavbeService {
     return 0
   }
 
+  getGeoTockeStavbe(naziv: string) {
+    return this.http.get<Ipoligon>(this.baseUrl + 'stavbe/geo-tocke/' + naziv);
+  }
 
   getStavba(id: number) {
     // const stavba = this.stavbe().find(x => x.id === id);
