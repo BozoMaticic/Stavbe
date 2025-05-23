@@ -62,18 +62,13 @@ export class StavbeService {
 
   getMerilnaMestaStavbeStevilo(naziv: string): number {
     this.http.get<MerilnoMesto[]>(this.baseUrl + 'stavbe/merilna-mesta/' + naziv)
-    .pipe(
-      tap((x) => {
-        return (x.length)
-      })
-    )
+      .pipe(
+        tap((x) => {
+          return (x.length)
+        })
+      )
     return 0
   }
-
-    getMojElektroMerilnaMesta(naziv: string) {
-    return this.http.get<MojElektroMerilnoMesto[]>(this.baseUrl + 'stavbe/moj-elektro-merilna-mesta/' + naziv);
-  }
-
 
 
   getGeoTockeStavbe(naziv: string) {
@@ -98,9 +93,9 @@ export class StavbeService {
 
   setMainPhoto(photo: Photo) {
 
-   const idStavbeInIdPhoto = this.stavbaIdSignal().toString() + " " + photo.id.toString()
+    const idStavbeInIdPhoto = this.stavbaIdSignal().toString() + " " + photo.id.toString()
 
-    return this.http.put(this.baseUrl + 'stavbe/set-main-photo/'+ idStavbeInIdPhoto, {}).pipe(
+    return this.http.put(this.baseUrl + 'stavbe/set-main-photo/' + idStavbeInIdPhoto, {}).pipe(
       // tap(() => {
       //   this.stavbe.update(stavbe => stavbe.map(m => {
       //     if (m.photosStavbe.includes(photo)) {
@@ -131,7 +126,7 @@ export class StavbeService {
 
 
 
-    // const parametri = new HttpParams()
-    // .set('stavbaNaziv', `${this.stavbaNaziv()}`)
-   // .set('PhotoId', `${photo.id}`)
+// const parametri = new HttpParams()
+// .set('stavbaNaziv', `${this.stavbaNaziv()}`)
+// .set('PhotoId', `${photo.id}`)
 

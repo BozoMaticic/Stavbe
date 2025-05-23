@@ -1,14 +1,16 @@
 export interface MojElektroMerilnoMesto {
-    id: number;
-    enotniIdentifikator: string;
-    sifraJavnegaObjekta: string;
-    nazivJavnegaObjekta: string;
-    gsrnMM: string;
-    naziv: string;
-    naslov: string;
-    rtp: string;
-    sNizvod: string;
-    tp: string;
-    nNizvod: string;
-    dobavitelj: string;
+  enotniIdentifikator: string
+  sifraJavnegaObjekta: string
+  nazivJavnegaObjekta: string
+  gsrnMM: string
+  naziv: string
+  naslov: string
+  rtp: string
+  sNizvod: string
+  tp: string
+  nNizvod: string
+  dobavitelj: string
+  idJavnegaObjekta: number
+  stavba: any
+  meritve15min: any
 }

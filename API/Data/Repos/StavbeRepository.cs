@@ -1,6 +1,7 @@
 using System;
 using API.DTOs;
 using API.Entities;
+using API.Entities.MojElektro;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
@@ -52,6 +53,7 @@ public class StavbeRepository(DataContext context, IMapper mapper) : IStavbeRepo
 
         return mapper.Map<MerilnoMestoDto[]>(stavba.MerilnaMesta);
     }
+
 
     public async Task<Poligon> GetGeoTocke(string nazivStavbe)
     {

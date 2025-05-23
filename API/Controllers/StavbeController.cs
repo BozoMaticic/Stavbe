@@ -2,6 +2,7 @@ using System;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Entities.MojElektro;
 using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
+
 [Authorize]
 public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper,
     IPhotoService photoService) : BaseApiController
@@ -30,6 +32,7 @@ public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper
         return stavba;
     }
 
+    // merilna mesta stavbe
     [HttpGet("merilna-mesta/{nazivStavbe}")]
 
     public async Task<ActionResult<MerilnoMestoDto[]>> GetMerilnaMesta(string nazivStavbe)
@@ -39,6 +42,8 @@ public class StavbeController(IStavbeRepository stavbeRepository, IMapper mapper
         return Ok(merMesta);
     }
 
+
+    // geo tocke stavbe
     [HttpGet("geo-tocke/{nazivStavbe}")]
     public async Task<ActionResult<GeoTockaDto[]>> GetGeoTocke(string nazivStavbe)
     {

@@ -1,6 +1,7 @@
 using System;
 using API.DTOs;
 using API.Entities;
+using API.Entities.MojElektro;
 using API.Helpers;
 
 namespace API.Interfaces;
